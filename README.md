@@ -1,4 +1,6 @@
-# Argument-Structure
+# Exploring the Role of Argument Structure in Online Debate Persuasion
+
+Code for paper "Exploring the Role of Argument Structure in Online Debate Persuasion" (https://www.aclweb.org/anthology/2020.emnlp-main.716.pdf) in EMNLP 2020.  
 Data preparation:
 Download DDO data from https://www.cs.cornell.edu/~esindurmus/ddo.html
 
