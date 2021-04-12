@@ -13,12 +13,6 @@ if __name__ == '__main__':
     n = 13786
     hidden_unit = 768
 
-    X_tmp = np.zeros((n,hidden_unit))
-
-    with open('../data_all_argument.json', 'r') as f:
-        debates = json.load(f)
-    f.close()
-
     with open('output_data_BERT_argument_last_three_sentence_full.pickle','rb') as f:
         X_tmp = pickle.load(f)
     f.close()
@@ -27,31 +21,18 @@ if __name__ == '__main__':
         data = pickle.load(f)
     f.close()
 
-    with open('dataforBERT_all_argument.pickle', 'rb') as f:
-        attribute = pickle.load(f)
-    f.close()
-
 
     X = data['X']
     Y = data['Y']
-    target_key = attribute['key']
-    argument_feature = extract_argument_features('dataforBERT_X_all_argument_last_three_sentence_full.pickle')
+    argument_feature_tmp = extract_argument_features('dataforBERT_X_all_argument_last_three_sentence_full.pickle')
     with open("argument_feature_rnn.pickle",'wb') as f:
-        pickle.dump(argument_feature,f)
+        pickle.dump(argument_feature_tmp,f)
     f.close()
 
     argument_feature = np.zeros((13786,32))
     argument_feature = argument_feature_tmp[:,0:32]
 
     argument_feature = (argument_feature - np.mean(argument_feature,axis=0)) / np.std(argument_feature,axis=0)
-
-    user_feature = extract_user_features('dataforBERT_X_all_argument_last_three_sentence_full.pickle')
-    with open("user_feature_rnn.pickle",'wb') as f:
-        pickle.dump(user_feature,f)
-    f.close()
-
-    user_feature = (user_feature - np.mean(user_feature,axis=0)) / np.std(user_feature,axis=0)
-    text_b = None
 
     train_index = []
     validation_index = []
